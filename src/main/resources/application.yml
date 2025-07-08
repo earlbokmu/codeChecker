@@ -1,3 +1,3 @@
 gemini:
   api-key: AIzaSyDKaAfyP_Z58l2MRsChSq_S1_0J_eqy-VI
-  api-url: https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-002:generateContent
+  api-url: https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent
