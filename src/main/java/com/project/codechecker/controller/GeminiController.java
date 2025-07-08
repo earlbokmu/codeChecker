@@ -18,9 +18,4 @@ public class GeminiController {
     public String ask(@RequestParam String question) {
         return geminiService.askGemini(question);
     }
-
-    @GetMapping("/res")
-    public String getGeminiResponse(@RequestParam(defaultValue = "Explain how AI works in a few words") String prompt) {
-        return geminiService.generateContent(prompt);
-    }
 }

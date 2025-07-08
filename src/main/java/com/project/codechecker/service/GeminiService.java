@@ -15,7 +15,7 @@ public class GeminiService {
     @Value("${GOOGLE_API_KEY}")
     private String apiKey;
 
-    private final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=";
+    private final String API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=";
 
     public String askGemini(String prompt) {
         RestTemplate restTemplate = new RestTemplate();
@@ -41,43 +41,6 @@ public class GeminiService {
             return parts.get(0).get("text");
         } catch (Exception e) {
             return "오류 발생: " + e.getMessage();
-        }
-    }
-
-    public String generateContent(String prompt) {
-        // 요청 본문 생성
-        Map<String, Object> part = new HashMap<>();
-        part.put("text", prompt);
-
-        Map<String, Object> content = new HashMap<>();
-        content.put("parts", Collections.singletonList(part));
-
-        Map<String, Object> body = new HashMap<>();
-        body.put("contents", Collections.singletonList(content));
-
-        // 헤더 설정
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("x-goog-api-key", apiKey);
-
-        System.out.println("Sending API key: " + apiKey);
-
-        HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
-
-        // 요청 보내기
-        RestTemplate restTemplate = new RestTemplate();
-        try {
-            ResponseEntity<String> response = restTemplate.exchange(
-                    API_URL,
-                    HttpMethod.POST,
-                    request,
-                    String.class
-            );
-
-            return response.getBody();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error: " + e.getMessage();
         }
     }
 }
